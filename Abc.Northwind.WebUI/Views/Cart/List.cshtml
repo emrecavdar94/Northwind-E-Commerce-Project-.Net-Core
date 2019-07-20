@@ -1,0 +1,55 @@
+﻿@model Abc.Northwind.WebUI.ViewComponents.CartSummaryViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <td>Product Name</td>
+        <td>unit Of price</td>
+        <td>Units In Stock
+        
+        <td>Quantity</td>
+        <td></td>
+
+    </tr>
+    @foreach (var item in Model.Cart.CartLines)
+    {
+        <tr>
+            <td>@item.Product.ProductName</td>
+            <td>@item.Product.UnitPrice</td>
+            <td>@item.Product.UnitsInStock</td>
+            <td>@item.Quentity</td>
+            <td class="text-right"><a class="btn btn-xs btn-danger" asp-controller="Cart" asp-action="Remove" asp-route-productId="@item.Product.ProductId"><span class="glyphicon glyphicon-remove"></span> Remove From Cart</a></td>
+        </tr>
+    }
+<tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><strong>Total</strong></td>
+    <td class="text-right">
+        <h3>
+            <strong>@Model.Cart.Total</strong>
+        </h3>
+    </td>
+</tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            <a asp-controller="Product" asp-action="List" class="btn btn-xs btn-default">
+                <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+            </a>
+        </td>
+        <td class="text-right">
+            <a asp-controller="Cart" asp-action="Complete" class="btn btn-xs btn-success">
+                <span class="glyphicon glyphicon-shopping-play"></span> Go To Checkout
+            </a>
+            
+        </td>
+    </tr>
+</table>
